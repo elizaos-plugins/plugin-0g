@@ -47,13 +47,19 @@ export const zgUpload: Action = {
         const flowAddr = !!runtime.getSetting("ZEROG_FLOW_ADDRESS");
         return zgIndexerRpc && zgEvmRpc && zgPrivateKey && flowAddr;
     },
-    handler: async (
+    handler: async ({
+        runtime,
+        message,
+        state,
+        options: _options,
+        callback,
+    }: {
         runtime: IAgentRuntime,
         message: Memory,
         state: State,
-        _options: any,
+        options: any,
         callback: HandlerCallback
-    ) => {
+    }) => {
         console.log("ZG_UPLOAD action called");
         if (!state) {
             state = (await runtime.composeState(message)) as State;
