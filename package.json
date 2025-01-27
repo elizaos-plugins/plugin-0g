@@ -14,38 +14,25 @@
     "dev": "tsup --format esm --dts --watch",
     "test": "vitest"
   },
-  "pluginType": "elizaos:plugin:1.0.0",
-  "pluginParameters": {
-      "type": "object",
-      "required": [
-          "zerogIndexerRpc",
-          "zerogEvmRpc",
-          "zerogPrivateKey",
-          "zerogFlowAddress"
-      ],
-      "properties": {
-          "zerogIndexerRpc": {
-              "type": "string",
-              "description": "0G indexer RPC endpoint"
-          },
-          "zerogEvmRpc": {
-              "type": "string",
-              "description": "0G EVM RPC endpoint"
-          },
-          "zerogPrivateKey": {
-              "type": "string",
-              "description": "Private key for transactions"
-          },
-          "zerogFlowAddress": {
-              "type": "string",
-              "description": "0G Flow contract address"
-          }
-      }
-  },
-  "pluginEnv": {
-      "ZEROG_INDEXER_RPC": "zerogIndexerRpc",
-      "ZEROG_EVM_RPC": "zerogEvmRpc",
-      "ZEROG_PRIVATE_KEY": "zerogPrivateKey",
-      "ZEROG_FLOW_ADDRESS": "zerogFlowAddress"
+  "agentConfig": {
+    "pluginType": "elizaos:client:1.0.0",
+    "pluginParameters": {
+        "ZEROG_INDEXER_RPC": {
+            "type": "string",
+            "description": "0G indexer RPC endpoint"
+        },
+        "ZEROG_EVM_RPC": {
+            "type": "string",
+            "description": "0G EVM RPC endpoint"
+        },
+        "ZEROG_PRIVATE_KEY": {
+            "type": "string",
+            "description": "Private key for transactions"
+        },
+        "ZEROG_FLOW_ADDRESS": {
+            "type": "string",
+            "description": "0G Flow contract address"
+        }
+    }
   }
 }
