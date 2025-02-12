@@ -13,6 +13,7 @@ import { promises as fs2 } from "node:fs";
 import { promises as fs } from "node:fs";
 import path from "node:path";
 var FileSecurityValidator = class {
+  config;
   constructor(config) {
     if (!config.allowedExtensions || config.allowedExtensions.length === 0) {
       throw new Error("Security configuration error: allowedExtensions must be specified");
@@ -239,6 +240,7 @@ var zgUpload = {
   ],
   description: "Store data using 0G protocol",
   validate: async (runtime, message) => {
+    var _a;
     elizaLogger2.debug("Starting ZG_UPLOAD validation", { messageId: message.id });
     try {
       const settings = {
@@ -264,7 +266,7 @@ var zgUpload = {
       }
       const config = {
         maxFileSize: Number.parseInt(runtime.getSetting("ZEROG_MAX_FILE_SIZE") || "10485760"),
-        allowedExtensions: runtime.getSetting("ZEROG_ALLOWED_EXTENSIONS")?.split(",") || [".pdf", ".png", ".jpg", ".jpeg", ".doc", ".docx"],
+        allowedExtensions: ((_a = runtime.getSetting("ZEROG_ALLOWED_EXTENSIONS")) == null ? void 0 : _a.split(",")) || [".pdf", ".png", ".jpg", ".jpeg", ".doc", ".docx"],
         uploadDirectory: runtime.getSetting("ZEROG_UPLOAD_DIR") || "/tmp/zerog-uploads",
         enableVirusScan: runtime.getSetting("ZEROG_ENABLE_VIRUS_SCAN") === "true"
       };
@@ -297,6 +299,7 @@ var zgUpload = {
     }
   },
   handler: async (runtime, message, state, _options, callback) => {
+    var _a;
     elizaLogger2.info("ZG_UPLOAD action started", {
       messageId: message.id,
       hasState: Boolean(state),
@@ -353,7 +356,7 @@ var zgUpload = {
       }
       const securityConfig = {
         maxFileSize: Number.parseInt(runtime.getSetting("ZEROG_MAX_FILE_SIZE") || "10485760"),
-        allowedExtensions: runtime.getSetting("ZEROG_ALLOWED_EXTENSIONS")?.split(",") || [".pdf", ".png", ".jpg", ".jpeg", ".doc", ".docx"],
+        allowedExtensions: ((_a = runtime.getSetting("ZEROG_ALLOWED_EXTENSIONS")) == null ? void 0 : _a.split(",")) || [".pdf", ".png", ".jpg", ".jpeg", ".doc", ".docx"],
         uploadDirectory: runtime.getSetting("ZEROG_UPLOAD_DIR") || "/tmp/zerog-uploads",
         enableVirusScan: runtime.getSetting("ZEROG_ENABLE_VIRUS_SCAN") === "true"
       };
